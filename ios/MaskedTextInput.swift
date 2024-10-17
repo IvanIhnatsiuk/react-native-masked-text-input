@@ -8,7 +8,7 @@ import UIKit
 
 class MaskedTextInputDecoratorView: UIView {
   var textView: RCTBaseTextInputView?
-  var maskInputListener: MaskedTextInputListener?
+  var maskInputListener: NotifyingMaskedTextFieldListener?
   var lastDispatchedEvent: [String: String] = [:]
 
   @objc weak var delegate: MaskedTextInputDecoratorViewDelegate?
@@ -160,7 +160,7 @@ class MaskedTextInputDecoratorView: UIView {
     if let previousSibling = previousSibling as? RCTBaseTextInputView {
       textView = previousSibling
       guard let textView = textView?.backedTextInputView as? RCTUITextField else { return }
-      maskInputListener = MaskedTextInputListener(
+      maskInputListener = NotifyingMaskedTextFieldListener(
         primaryFormat: primaryMaskFormat as String,
         autocomplete: autocomplete,
         autocompleteOnFocus: autocompleteOnFocus,
